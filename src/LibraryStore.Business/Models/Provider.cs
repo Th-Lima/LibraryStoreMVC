@@ -20,6 +20,7 @@ namespace LibraryStore.Models
         public bool Active { get; set; }
 
         /* EF Relations */
-        IEnumerable<Product> Products { get; set; }
+        [Display(Name = "Produtos")]
+        public IEnumerable<Product> Products { get; set; }
     }
 }

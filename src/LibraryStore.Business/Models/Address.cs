@@ -28,6 +28,7 @@ namespace LibraryStore.Models
         public string State { get; set; }
 
         /* EF Relation */
+        [Display(Name = "Fornecedor")]
         public Provider Provider { get; set; }
     }
 }
