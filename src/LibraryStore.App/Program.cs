@@ -21,6 +21,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddAutoMapper(typeof(Program));
+
 builder.Services.AddScoped<LibraryStoreDbContext>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProviderRepository, ProviderRepository>();
