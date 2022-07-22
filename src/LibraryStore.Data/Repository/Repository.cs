@@ -27,7 +27,7 @@ namespace LibraryStore.Data.Repository
             return await DbSet.FindAsync(id);
         }
 
-        public virtual async Task<List<TEntity>> GetAll()
+        public virtual async Task<IList<TEntity>> GetAll()
         {
             return await DbSet.ToListAsync();
         }

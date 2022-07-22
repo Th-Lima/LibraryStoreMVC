@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using LibraryStore.App.ViewModels;
 
 namespace LibraryStore.App.Data
 {
@@ -9,5 +10,6 @@ namespace LibraryStore.App.Data
             : base(options)
         {
         }
+        public DbSet<LibraryStore.App.ViewModels.ProductViewModel> ProductViewModel { get; set; }
     }
 }

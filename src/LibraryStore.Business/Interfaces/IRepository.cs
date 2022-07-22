@@ -9,7 +9,7 @@ namespace LibraryStore.Business.Interfaces
 
         Task<TEntity> GetById(Guid id);
 
-        Task<List<TEntity>> GetAll ();
+        Task<IList<TEntity>> GetAll();
 
         Task Edit(TEntity entity);
 

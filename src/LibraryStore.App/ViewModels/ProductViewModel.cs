@@ -7,6 +7,10 @@ namespace LibraryStore.App.ViewModels
         [Key]
         public Guid Id { get; set; }
 
+        [Display(Name = "Fornecedor")]
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        public Guid ProviderId { get; set; }
+
         [Display(Name = "Nome")]
         [Required(ErrorMessage = "O Campo {0} é obrigatório")]
         [StringLength(200, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 2)]
@@ -19,6 +23,7 @@ namespace LibraryStore.App.ViewModels
 
         public IFormFile ImageUpload { get; set; }
 
+        [Display(Name = "Imagem")]
         public string Image { get; set; }
 
         [Display(Name = "Valor")]
@@ -34,5 +39,7 @@ namespace LibraryStore.App.ViewModels
 
         [Display(Name = "Fornecedor")]
         public ProviderViewModel Provider { get; set; }
+
+        public IEnumerable<ProviderViewModel> Providers { get; set; }
     }
 }
