@@ -1,46 +1,48 @@
 ﻿@model LibraryStore.App.ViewModels.ProviderViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Novo Fornecedor";
 }
 
-<h1>Create</h1>
+<h1>@ViewData["Title"]</h1>
 
-<h4>ProviderViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-1">
                 <label asp-for="Document" class="control-label"></label>
                 <input asp-for="Document" class="form-control" />
                 <span asp-validation-for="Document" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="TypeProvider" class="control-label"></label>
-                <input asp-for="TypeProvider" class="form-control" />
-                <span asp-validation-for="TypeProvider" class="text-danger"></span>
+            <div class="form-group mt-2">
+                <label asp-for="TypeProvider" class="control-label"></label><br />
+                <input class="mr-1" type="radio" value="1" asp-for="TypeProvider" checked/> Pessoa Física <br />
+                <input type="radio" value="2" asp-for="TypeProvider" /> Pessoa Jurídica
             </div>
-            <div class="form-group form-check">
+            <div class="form-group form-check mt-2">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
                 </label>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+            <h4>Endereço</h4>
+            <hr />
+            <partial name="_Address">
+
+            <div class="form-group mt-2">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+                <a class="btn btn-outline-secondary" asp-action="Index">Voltar</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

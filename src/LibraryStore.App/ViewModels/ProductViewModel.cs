@@ -21,6 +21,7 @@ namespace LibraryStore.App.ViewModels
         [StringLength(1000, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 2)]
         public string Description { get; set; }
 
+        [Display(Name = "Imagem")]
         public IFormFile ImageUpload { get; set; }
 
         [Display(Name = "Imagem")]

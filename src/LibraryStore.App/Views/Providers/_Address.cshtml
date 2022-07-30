@@ -1,0 +1,41 @@
+﻿@model LibraryStore.App.ViewModels.ProviderViewModel
+
+@{
+    ViewData["Title"] = "_Address";
+}
+
+    <div class="form-group">
+        <label asp-for="Address.ZipCode" class="control-label"></label>
+        <input asp-for="Address.ZipCode" class="form-control" />
+        <span asp-validation-for="Address.ZipCode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.AddressPlace" class="control-label"></label>
+        <input asp-for="Address.AddressPlace" class="form-control" />
+        <span asp-validation-for="Address.AddressPlace" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.NumberAddress" class="control-label"></label>
+        <input asp-for="Address.NumberAddress" class="form-control" />
+        <span asp-validation-for="Address.NumberAddress" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.Complement" class="control-label"></label>
+        <input asp-for="Address.Complement" class="form-control" />
+        <span asp-validation-for="Address.Complement" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.Neighborhood" class="control-label"></label>
+        <input asp-for="Address.Neighborhood" class="form-control" />
+        <span asp-validation-for="Address.Neighborhood" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.City" class="control-label"></label>
+        <input asp-for="Address.City" class="form-control" />
+        <span asp-validation-for="Address.City" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.State" class="control-label"></label>
+        <input asp-for="Address.State" class="form-control" />
+        <span asp-validation-for="Address.State" class="text-danger"></span>
+    </div>

@@ -10,6 +10,7 @@ namespace LibraryStore.App.Data
             : base(options)
         {
         }
-        public DbSet<LibraryStore.App.ViewModels.ProductViewModel> ProductViewModel { get; set; }
+        //public DbSet<LibraryStore.App.ViewModels.ProductViewModel> ProductViewModel { get; set; }
+        //public DbSet<LibraryStore.App.ViewModels.AddressViewModel> AddressViewModel { get; set; }
     }
 }

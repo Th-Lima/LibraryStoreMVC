@@ -4,31 +4,27 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
+<div class="text-center mb-5">
+    <h4 class="mb-2">Novo Produto</h4>
+    <a class="btn btn-primary" asp-action="Create"><i class="fa fa-plus"></i></a>
+</div>
+<table class="table table-hover">
+    <thead class="thead-dark">
         <tr>
+            <th>
+
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Image)
+                @Html.DisplayNameFor(model => model.Provider)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Active)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Provider)
             </th>
             <th></th>
         </tr>
@@ -40,10 +36,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
+                @Html.DisplayFor(modelItem => item.Provider)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
@@ -51,13 +44,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Active)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Provider.Document)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            <td class="text-right">
+                <a class="btn btn-info" title="Detalhes" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-search"></i></a> 
+                <a class="btn btn-warning" title="Editar" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a> 
+                <a class="btn btn-outline-danger" title="Remover" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
             </td>
         </tr>
 }
