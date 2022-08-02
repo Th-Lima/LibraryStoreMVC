@@ -3,6 +3,7 @@ using LibraryStore.App.ViewModels;
 using LibraryStore.Business.Interfaces;
 using AutoMapper;
 using LibraryStore.Models;
+using LibraryStore.App.Helpers;
 
 namespace LibraryStore.App.Controllers
 {
@@ -54,9 +55,18 @@ namespace LibraryStore.App.Controllers
             {
                 return View(productViewModel);
             }
+
+            var imgPrefix = Guid.NewGuid() + "_";
+
+            if(!await ImageHelper.UploadImage(productViewModel.ImageUpload, imgPrefix, ModelState))
+            {
+                return View(productViewModel);
+            }
+
+            productViewModel.Image = imgPrefix + productViewModel.ImageUpload.FileName;
             await _productRepository.Add(_mapper.Map<Product>(productViewModel));
 
-            return View(productViewModel);            
+            return RedirectToAction("Index");            
         }
 
         [HttpGet]

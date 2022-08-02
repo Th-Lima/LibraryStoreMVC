@@ -8,11 +8,13 @@
     <h4 class="mb-2">Novo Produto</h4>
     <a class="btn btn-primary" asp-action="Create"><i class="fa fa-plus"></i></a>
 </div>
+
+<h4>Lista de Produtos</h4>
 <table class="table table-hover">
     <thead class="thead-dark">
         <tr>
             <th>
-
+                
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -33,10 +35,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                <img src="~/images/@item.Image" alt="@item.Image" style="width: 70px; height: 100px" /> 
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Provider)
+                @Html.DisplayFor(modelItem => item.Provider.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
