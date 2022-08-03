@@ -5,7 +5,11 @@ namespace LibraryStore.Data.Context
 {
     public class LibraryStoreDbContext : DbContext
     {
-        public LibraryStoreDbContext(DbContextOptions options) : base(options) { }
+        public LibraryStoreDbContext(DbContextOptions options) : base(options) 
+        {
+            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            ChangeTracker.AutoDetectChangesEnabled = false;
+        }
 
         public DbSet<Product> Products { get; set; }
 

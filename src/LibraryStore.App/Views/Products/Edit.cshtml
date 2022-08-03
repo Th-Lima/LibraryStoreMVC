@@ -1,22 +1,21 @@
 ﻿@model LibraryStore.App.ViewModels.ProductViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar " + Model.Name;
 }
 
-<h1>Edit</h1>
+<h6>@ViewData["Title"]</h6>
 
-<h4>ProductViewModel</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+    <div class="col-md-10">
+        <form enctype="multipart/form-data" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+
             <div class="form-group">
-                <label asp-for="ProviderId" class="control-label"></label>
-                <select asp-for="ProviderId" class="form-control" asp-items="ViewBag.ProviderId"></select>
-                <span asp-validation-for="ProviderId" class="text-danger"></span>
+                <label asp-for="ProviderId" class="control-label"></label><br />
+                <label><b>@Model.Provider.Name</b></label>
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -25,14 +24,23 @@
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <textarea cols="40" rows="3" asp-for="Description" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
+                <label>Imagem Atual</label><br />
+                <img src="~/images/@Model.Image" alt="@Model.Image" style="width:70px; height:100px" />
             </div>
+
+            <div class="form-group mt-1">
+                <label asp-for="ImageUpload" class="control-label"></label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="ImageUpload" asp-for="ImageUpload"/>
+                    <label data-browse="Procurar" style="width: 400px" class="custom-file-label" for="ImageUpload"></label>
+                    <label style="display:none" id="img_name"></label>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
                 <input asp-for="Price" class="form-control" />
@@ -44,16 +52,20 @@
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <a class="btn btn-secondary" href="javascript:window.history.back();">Voltar</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+     <script>
+        $("#ImageUpload").change(function() {
+            $("#img_name").text(this.files[0].name);
+            $("#img_name")[0].style.display = 'block';
+        });
+    </script>
 }

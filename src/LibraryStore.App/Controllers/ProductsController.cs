@@ -89,12 +89,32 @@ namespace LibraryStore.App.Controllers
             if (id != productViewModel.Id)
                 return NotFound();
 
+            var productAtualization = await GetProduct(id);
+            productViewModel.Provider = productAtualization.Provider;
+            productViewModel.Image = productAtualization.Image;
+
             if (!ModelState.IsValid)
             {
                 return View(productViewModel);
             }
 
-            await _productRepository.Edit(_mapper.Map<Product>(productViewModel));
+            if(productViewModel.ImageUpload != null)
+            {
+                var imgPrefix = Guid.NewGuid() + "_";
+                if(!await ImageHelper.UploadImage(productViewModel.ImageUpload, imgPrefix, ModelState))
+                {
+                    return View(productViewModel);
+                }
+
+                productAtualization.Image = imgPrefix + productViewModel.ImageUpload.FileName;
+            }
+
+            productAtualization.Name = productViewModel.Name;
+            productAtualization.Description = productViewModel.Description;
+            productAtualization.Price = productViewModel.Price;
+            productAtualization.Active = productViewModel.Active;
+
+            await _productRepository.Edit(_mapper.Map<Product>(productAtualization));
 
             return RedirectToAction(nameof(Index));
         }
