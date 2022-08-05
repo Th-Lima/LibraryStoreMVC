@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using LibraryStore.App.Extensions;
+using System.ComponentModel.DataAnnotations;
 
 namespace LibraryStore.App.ViewModels
 {
@@ -29,6 +30,7 @@ namespace LibraryStore.App.ViewModels
 
         [Display(Name = "Valor")]
         [Required(ErrorMessage = "O Campo {0} é obrigatório")]
+        [Currency]
         public decimal Price { get; set; }
 
         [Display(Name = "Data Cadastro")]
