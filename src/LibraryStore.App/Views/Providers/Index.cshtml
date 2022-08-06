@@ -1,4 +1,5 @@
-﻿@model IEnumerable<LibraryStore.App.ViewModels.ProviderViewModel>
+﻿@using LibraryStore.App.Extensions
+@model IEnumerable<LibraryStore.App.ViewModels.ProviderViewModel>
 
 @{
     ViewData["Title"] = "Lista de Fornecedores";
@@ -30,7 +31,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Document)
+                @this.FormatDocument(item.TypeProvider, item.Document)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Active)

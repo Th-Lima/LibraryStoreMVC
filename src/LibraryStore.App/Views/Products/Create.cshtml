@@ -25,18 +25,16 @@
             </div>
             <div class="form-group mt-1">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <textarea cols="40" rows="3" asp-for="Description" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group mt-1">
                 <label asp-for="ImageUpload" class="control-label"></label>
-
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="ImageUpload" asp-for="ImageUpload"/>
                     <label data-browse="Procurar" style="width: 400px" class="custom-file-label" for="ImageUpload"></label>
                     <label style="display:none" id="img_name"></label>
                 </div>
-
                 <span asp-validation-for="ImageUpload" class="text-danger"></span>
             </div>
             <div class="form-group mt-1">
@@ -51,7 +49,7 @@
             </div>
             <div class="form-group mt-4">
                 <input type="submit" value="Salvar" class="btn btn-primary" />
-                <a class="btn btn-outline-secondary" asp-action="Index">Cancelar</a>
+                <a class="btn btn-outline-secondary" asp-action="Index">Voltar</a>
             </div>
         </form>
     </div>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<LibraryStore.App.ViewModels.ProductViewModel>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Provider)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr>
+                <td>
+                    <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id">
+                        <img src="~/images/@item.Image" alt="@item.Image" style="width: 70px; height: 100px; box-shadow:4px 3px 0px 0px lightgrey" /> 
+                    </a>
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Provider.Name)
+                </td>
+                <td>
+                    @(item.Price.ToString("C"))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-warning" title="Editar" asp-controller="Products" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a> 
+                    <a class="btn btn-outline-danger" title="Remover" asp-controller="Products" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+}
+    </tbody>
+</table>

@@ -1,49 +1,63 @@
 ﻿@model LibraryStore.App.ViewModels.ProviderViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Fornecedor";
 }
 
-<h1>Edit</h1>
+<h1>@ViewData["Title"]</h1>
 
-<h4>ProviderViewModel</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+
+            <label asp-for="Document" class="control-label"></label>
+            <input asp-for="Document" class="form-control" />
+            <span asp-validation-for="Document" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="TypeProvider" class="control-label"></label>
+            <div>
+                <input type="radio" value="1" asp-for="TypeProvider" checked="@(Model.TypeProvider == 1)" /> Pessoa Física
+                <input type="radio" value="2" asp-for="TypeProvider" class="m-lg-1" checked="@(Model.TypeProvider == 2)" /> Pessoa Jurídica
             </div>
-            <div class="form-group">
-                <label asp-for="Document" class="control-label"></label>
-                <input asp-for="Document" class="form-control" />
-                <span asp-validation-for="Document" class="text-danger"></span>
+            <div>
+                &nbsp;
             </div>
-            <div class="form-group">
-                <label asp-for="TypeProvider" class="control-label"></label>
-                <input asp-for="TypeProvider" class="form-control" />
-                <span asp-validation-for="TypeProvider" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
+            <div class="form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
                 </label>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+
+    <div class="form-group">
+        <input type="submit" value="Salvar" class="btn btn-primary" />
+        <a class="btn btn-outline-secondary" href="javascript:window.history.back();">Voltar</a>
+    </div>
+</form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <partial name="_DetailsAddress" />
+</div>
+
+<hr />
+<h4>Produtos</h4>
+<div>
+    <partial name="../Products/_ProductList" model="@Model.Products" />
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
