@@ -58,9 +58,13 @@
                     @Html.DisplayFor(model => model.Address.State)
                 </td>
                <td>
-                   <a class="btn btn-info" href=""><i title="Editar" class="fa fa-pencil-alt"></i></a>
+                   <a asp-action="UpdateAddress" asp-route-id="@Model.Id" class="btn btn-info" data-modal=""><i title="Editar" class="fa fa-pencil-alt"></i></a>
                </td>
             </tr>
     </table>
         }
 </div>
+
+<script>
+    AjaxModal();
+</script>

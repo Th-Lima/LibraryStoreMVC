@@ -9,11 +9,13 @@ namespace LibraryStore.App.Controllers
     public class ProvidersController : BaseController
     {
         private readonly IProviderRepository _providerRepository;
+        private readonly IAddressRepository _addressRepository;
         private readonly IMapper _mapper;
 
-        public ProvidersController(IProviderRepository context, IMapper mapper)
+        public ProvidersController(IProviderRepository context, IMapper mapper, IAddressRepository addressRepository)
         {
             _providerRepository = context;
+            _addressRepository = addressRepository;
             _mapper = mapper;
         }
 
@@ -110,6 +112,47 @@ namespace LibraryStore.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> GetAddress(Guid id)
+        {
+            var provider = await GetProviderAddress(id);
+
+            if(provider == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("_DetailsAddress", provider);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateAddress(Guid id)
+        {
+            var provider = await GetProviderAddress(id);
+
+            if (provider == null)
+                return NotFound();
+
+            return PartialView("_UpdateAddress", new ProviderViewModel { Address = provider.Address });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateAddress(ProviderViewModel providerViewModel)
+        {
+            ModelState.Remove("Name");
+            ModelState.Remove("Document");
+
+            if (!ModelState.IsValid)
+                return PartialView("_UpdateAddress", providerViewModel);
+
+            await _addressRepository.Edit(_mapper.Map<Address>(providerViewModel.Address));
+
+            var url = Url.Action("GetAddress", "Providers", new { id = providerViewModel.Address.ProviderId });
+
+            return Json(new { success = true, url });
+        }
+
+        //Private methods
         private async Task<ProviderViewModel> GetProviderAddress(Guid providerId)
         {
             return _mapper.Map<ProviderViewModel>(await _providerRepository.GetProviderAddress(providerId));

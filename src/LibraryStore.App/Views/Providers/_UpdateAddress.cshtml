@@ -1,0 +1,29 @@
+﻿@model LibraryStore.App.ViewModels.ProviderViewModel
+@{
+    ViewData["Title"] = "Atualizar Endereço";
+}
+
+<div class="modal-header">
+    <h4 class="modal-title">@ViewData["Title"]</h4>
+    
+    <button type="button" data-dismiss="modal">
+       <i class="fa fa-close"></i>
+        <span aria-hidden="true"></span><span class="sr-only">Fechar</span>
+    </button>
+</div>
+
+<form asp-action="UpdateAddress">
+    <div class="modal-body">
+        <input type="hidden" asp-for="Address.ProviderId"/>
+        <input type="hidden" asp-for="Address.Id"/>
+
+        <partial name="_Address"/>
+
+        <div class="modal-footer">
+            <div class="col-md-offsset-2 col-md-10">
+                <input type="submit" value="Atualizar Endereço" class="btn btn-success"/>
+                <input type="button" value="Fechar" class="btn btn-outline-secondary" data-dismiss="modal"/>
+            </div>
+        </div>
+    </div>
+</form>
