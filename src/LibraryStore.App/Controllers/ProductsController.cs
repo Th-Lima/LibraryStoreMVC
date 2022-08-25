@@ -20,10 +20,13 @@ namespace LibraryStore.App.Controllers
             _mapper = mapper;
         }
 
+        [Route("lista-de-produtos")]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<ProductViewModel>>(await _productRepository.GetProductsProviders()));
         }
+
+        [Route("dados-do-produto/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
             var productViewModel = await GetProduct(id);
@@ -36,7 +39,7 @@ namespace LibraryStore.App.Controllers
             return View(productViewModel);
         }
 
-        [HttpGet]
+        [Route("novo-produto")]
         public async Task<IActionResult> Create()
         {
             var productViewModel = await FillProviders(new ProductViewModel());
@@ -44,6 +47,7 @@ namespace LibraryStore.App.Controllers
             return View(productViewModel);
         }
 
+        [Route("novo-produto")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductViewModel productViewModel)
@@ -68,7 +72,7 @@ namespace LibraryStore.App.Controllers
             return RedirectToAction("Index");            
         }
 
-        [HttpGet]
+        [Route("editar-produto/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var productViewModel = await GetProduct(id);
@@ -81,6 +85,7 @@ namespace LibraryStore.App.Controllers
             return View(productViewModel);
         }
 
+        [Route("editar-produto/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, ProductViewModel productViewModel)
@@ -118,7 +123,7 @@ namespace LibraryStore.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
+        [Route("excluir-produto/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var product = await GetProduct(id);
@@ -129,6 +134,7 @@ namespace LibraryStore.App.Controllers
             return View(product);
         }
 
+        [Route("excluir-produto/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -143,6 +149,7 @@ namespace LibraryStore.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        //Private methods
         private async Task<ProductViewModel> GetProduct(Guid id)
         {
             var product = _mapper.Map<ProductViewModel>(await _productRepository.GetProductProvider(id));

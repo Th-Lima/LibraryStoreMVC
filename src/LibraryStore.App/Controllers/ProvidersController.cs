@@ -19,12 +19,13 @@ namespace LibraryStore.App.Controllers
             _mapper = mapper;
         }
 
+        [Route("lista-de-fornecedores")]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<ProviderViewModel>>(await _providerRepository.GetAll()));
         }
 
-        [HttpGet]
+        [Route("dados-do-fornecedor/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
             var providerViewModel = await GetProviderAddress(id);
@@ -37,12 +38,13 @@ namespace LibraryStore.App.Controllers
             return View(providerViewModel);
         }
 
-        [HttpGet]
+        [Route("novo-fornecedor")]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Route("novo-fornecedor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProviderViewModel providerViewModel)
@@ -56,6 +58,7 @@ namespace LibraryStore.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("editar-fornecedor/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var providerViewModel = await GetProviderProductAddress(id);
@@ -68,6 +71,7 @@ namespace LibraryStore.App.Controllers
             return View(providerViewModel);
         }
 
+        [Route("editar-fornecedor/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, ProviderViewModel providerViewModel)
@@ -84,6 +88,7 @@ namespace LibraryStore.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("excluir-fornecedor/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var providerViewModel = await GetProviderAddress(id);
@@ -96,6 +101,7 @@ namespace LibraryStore.App.Controllers
             return View(providerViewModel);
         }
 
+        [Route("excluir-fornecedor/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -112,6 +118,7 @@ namespace LibraryStore.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("obter-endereco-fornecedor/{id:guid}")]
         public async Task<IActionResult> GetAddress(Guid id)
         {
             var provider = await GetProviderAddress(id);
@@ -124,7 +131,7 @@ namespace LibraryStore.App.Controllers
             return PartialView("_DetailsAddress", provider);
         }
 
-        [HttpGet]
+        [Route("atualizar-endereco-fornecedor/{id:guid}")]
         public async Task<IActionResult> UpdateAddress(Guid id)
         {
             var provider = await GetProviderAddress(id);
@@ -135,6 +142,7 @@ namespace LibraryStore.App.Controllers
             return PartialView("_UpdateAddress", new ProviderViewModel { Address = provider.Address });
         }
 
+        [Route("atualizar-endereco-fornecedor/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateAddress(ProviderViewModel providerViewModel)
