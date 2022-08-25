@@ -24,7 +24,6 @@ namespace LibraryStore.App.Controllers
         {
             return View(_mapper.Map<IEnumerable<ProductViewModel>>(await _productRepository.GetProductsProviders()));
         }
-
         public async Task<IActionResult> Details(Guid id)
         {
             var productViewModel = await GetProduct(id);
