@@ -9,13 +9,16 @@ namespace LibraryStore.App.Controllers
     public class ProvidersController : BaseController
     {
         private readonly IProviderRepository _providerRepository;
-        private readonly IAddressRepository _addressRepository;
+        private readonly IProviderService _providerService;
         private readonly IMapper _mapper;
 
-        public ProvidersController(IProviderRepository context, IMapper mapper, IAddressRepository addressRepository)
+        public ProvidersController(IProviderRepository context,
+            IMapper mapper,
+            IProviderService providerService,
+            INotifier notifier) : base(notifier)
         {
             _providerRepository = context;
-            _addressRepository = addressRepository;
+            _providerService = providerService;
             _mapper = mapper;
         }
 
@@ -53,7 +56,10 @@ namespace LibraryStore.App.Controllers
                 return View(providerViewModel);
                 
             var provider = _mapper.Map<Provider>(providerViewModel);
-            await _providerRepository.Add(provider);
+            await _providerService.Add(provider);
+
+            if (!ValidOperation())
+                return View(providerViewModel);
 
             return RedirectToAction(nameof(Index));
         }
@@ -83,7 +89,10 @@ namespace LibraryStore.App.Controllers
                 return View(providerViewModel);
 
             var provider = _mapper.Map<Provider>(providerViewModel);
-            await _providerRepository.Edit(provider);
+            await _providerService.Update(provider);
+
+            if (!ValidOperation())
+                return View(await GetProviderProductAddress(id));
 
             return RedirectToAction(nameof(Index));
         }
@@ -113,7 +122,10 @@ namespace LibraryStore.App.Controllers
                 return NotFound();
             }
 
-            await _providerRepository.Delete(id);
+            await _providerService.Remove(id);
+
+            if (!ValidOperation())
+                return View(providerViewModel);
 
             return RedirectToAction(nameof(Index));
         }
@@ -153,7 +165,10 @@ namespace LibraryStore.App.Controllers
             if (!ModelState.IsValid)
                 return PartialView("_UpdateAddress", providerViewModel);
 
-            await _addressRepository.Edit(_mapper.Map<Address>(providerViewModel.Address));
+            await _providerService.UpdateAddress(_mapper.Map<Address>(providerViewModel.Address));
+
+            if (!ValidOperation())
+                return PartialView("_UpdateAddress", providerViewModel);
 
             var url = Url.Action("GetAddress", "Providers", new { id = providerViewModel.Address.ProviderId });
 

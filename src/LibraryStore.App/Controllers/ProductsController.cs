@@ -11,12 +11,18 @@ namespace LibraryStore.App.Controllers
     {
         private readonly IProductRepository _productRepository;
         private readonly IProviderRepository _providerRepository;
+        private readonly IProductService _productService;
         private readonly IMapper _mapper;
 
-        public ProductsController(IProductRepository productRepository, IProviderRepository providerRepository, IMapper mapper)
+        public ProductsController(IProductRepository productRepository, 
+            IProviderRepository providerRepository, 
+            IProductService productService, 
+            IMapper mapper, 
+            INotifier notifier) : base(notifier)
         {
             _productRepository = productRepository;
             _providerRepository = providerRepository;
+            _productService = productService;
             _mapper = mapper;
         }
 
@@ -67,7 +73,10 @@ namespace LibraryStore.App.Controllers
             }
 
             productViewModel.Image = imgPrefix + productViewModel.ImageUpload.FileName;
-            await _productRepository.Add(_mapper.Map<Product>(productViewModel));
+            await _productService.Add(_mapper.Map<Product>(productViewModel));
+
+            if (!ValidOperation())
+                return View(productViewModel);
 
             return RedirectToAction("Index");            
         }
@@ -118,7 +127,10 @@ namespace LibraryStore.App.Controllers
             productAtualization.Price = productViewModel.Price;
             productAtualization.Active = productViewModel.Active;
 
-            await _productRepository.Edit(_mapper.Map<Product>(productAtualization));
+            await _productService.Update(_mapper.Map<Product>(productAtualization));
+
+            if (!ValidOperation())
+                return View(productViewModel);
 
             return RedirectToAction(nameof(Index));
         }
@@ -144,7 +156,12 @@ namespace LibraryStore.App.Controllers
             if (product == null)
                 return NotFound();
 
-            await _productRepository.Delete(id);
+            await _productService.Remove(id);
+
+            if (!ValidOperation())
+                return View(product);
+
+            TempData["Success"] = "Produto excluído com sucesso!";
 
             return RedirectToAction(nameof(Index));
         }

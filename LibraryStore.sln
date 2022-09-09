@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryStore.Business", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryStore.Data", "src\LibraryStore.Data\LibraryStore.Data.csproj", "{FD2605D5-26FD-425C-8ED4-5853DFD2EE7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryStore.App", "src\LibraryStore.App\LibraryStore.App.csproj", "{4608D761-2C97-4580-AD86-E478CE6AB5F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryStore.App", "src\LibraryStore.App\LibraryStore.App.csproj", "{4608D761-2C97-4580-AD86-E478CE6AB5F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

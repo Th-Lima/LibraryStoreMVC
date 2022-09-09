@@ -105,3 +105,7 @@ function SearchCep() {
         });
     });
 }
+
+$(document).ready(function () {
+    $("#msg_box").fadeOut(2900);
+});
