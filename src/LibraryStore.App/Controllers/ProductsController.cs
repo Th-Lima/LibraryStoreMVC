@@ -4,9 +4,12 @@ using LibraryStore.Business.Interfaces;
 using AutoMapper;
 using LibraryStore.Models;
 using LibraryStore.App.Helpers;
+using Microsoft.AspNetCore.Authorization;
+using LibraryStore.App.Extensions;
 
 namespace LibraryStore.App.Controllers
 {
+    [Authorize]
     public class ProductsController : BaseController
     {
         private readonly IProductRepository _productRepository;
@@ -26,12 +29,14 @@ namespace LibraryStore.App.Controllers
             _mapper = mapper;
         }
 
+        [AllowAnonymous]
         [Route("lista-de-produtos")]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<ProductViewModel>>(await _productRepository.GetProductsProviders()));
         }
 
+        [AllowAnonymous]
         [Route("dados-do-produto/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
@@ -45,6 +50,7 @@ namespace LibraryStore.App.Controllers
             return View(productViewModel);
         }
 
+        [ClaimsAuthorize("Product", "Add")]
         [Route("novo-produto")]
         public async Task<IActionResult> Create()
         {
@@ -53,6 +59,7 @@ namespace LibraryStore.App.Controllers
             return View(productViewModel);
         }
 
+        [ClaimsAuthorize("Product", "Add")]
         [Route("novo-produto")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -81,6 +88,7 @@ namespace LibraryStore.App.Controllers
             return RedirectToAction("Index");            
         }
 
+        [ClaimsAuthorize("Product", "Update")]
         [Route("editar-produto/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -94,6 +102,7 @@ namespace LibraryStore.App.Controllers
             return View(productViewModel);
         }
 
+        [ClaimsAuthorize("Product", "Update")]
         [Route("editar-produto/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -135,6 +144,7 @@ namespace LibraryStore.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [ClaimsAuthorize("Product", "Remove")]
         [Route("excluir-produto/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -146,6 +156,7 @@ namespace LibraryStore.App.Controllers
             return View(product);
         }
 
+        [ClaimsAuthorize("Product", "Remove")]
         [Route("excluir-produto/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
