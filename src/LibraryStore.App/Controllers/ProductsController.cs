@@ -62,7 +62,6 @@ namespace LibraryStore.App.Controllers
         [ClaimsAuthorize("Product", "Add")]
         [Route("novo-produto")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductViewModel productViewModel)
         {
             productViewModel = await FillProviders(productViewModel);
@@ -105,7 +104,6 @@ namespace LibraryStore.App.Controllers
         [ClaimsAuthorize("Product", "Update")]
         [Route("editar-produto/{id:guid}")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, ProductViewModel productViewModel)
         {
             if (id != productViewModel.Id)
@@ -159,7 +157,6 @@ namespace LibraryStore.App.Controllers
         [ClaimsAuthorize("Product", "Remove")]
         [Route("excluir-produto/{id:guid}")]
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var product = await GetProduct(id);

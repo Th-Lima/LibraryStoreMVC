@@ -56,7 +56,6 @@ namespace LibraryStore.App.Controllers
         [ClaimsAuthorize("Provider", "Add")]
         [Route("novo-fornecedor")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProviderViewModel providerViewModel)
         {
             if (!ModelState.IsValid) 
@@ -88,7 +87,6 @@ namespace LibraryStore.App.Controllers
         [ClaimsAuthorize("Provider", "Update")]
         [Route("editar-fornecedor/{id:guid}")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, ProviderViewModel providerViewModel)
         {
             if (id != providerViewModel.Id)
@@ -123,11 +121,10 @@ namespace LibraryStore.App.Controllers
         [ClaimsAuthorize("Provider", "Remove")]
         [Route("excluir-fornecedor/{id:guid}")]
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var providerViewModel = await GetProviderAddress(id);
-           
+
             if (providerViewModel == null)
             {
                 return NotFound();
@@ -170,7 +167,6 @@ namespace LibraryStore.App.Controllers
         [ClaimsAuthorize("Provider", "Update")]
         [Route("atualizar-endereco-fornecedor/{id:guid}")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateAddress(ProviderViewModel providerViewModel)
         {
             ModelState.Remove("Name");

@@ -1,4 +1,6 @@
-﻿namespace LibraryStore.App.Configurations
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace LibraryStore.App.Configurations
 {
     public static class MvcConfiguration
     {
@@ -22,6 +24,8 @@
                 o.ModelBindingMessageProvider.SetValueIsInvalidAccessor(x => invalidValueMsg);
                 o.ModelBindingMessageProvider.SetValueMustBeANumberAccessor(x => beNumericMsg);
                 o.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(x => requiredValueMsg);
+
+                o.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
 
             return services;
