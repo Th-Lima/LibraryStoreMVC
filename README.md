@@ -149,4 +149,4 @@ Este reconhecimento é um prêmio internacional conferido pela Microsoft aos pro
 
 [03 - FluentValidation .NET](https://fluentvalidation.net/)
 
-[04 - Documentação ASP.NET Core](https://iasaglobal.org/)
+[04 - Documentação ASP.NET Core](https://learn.microsoft.com/pt-br/aspnet/core/?view=aspnetcore-2.2)
