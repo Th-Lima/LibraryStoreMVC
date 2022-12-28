@@ -1,4 +1,4 @@
-# Dominando o Asp.Net Core
+# Dominando o Asp.Net MVC Core
 
 ## Plataforma
 
@@ -6,7 +6,7 @@
 
 ## Link para o curso
 
-[Dominando o Asp.Net Core](https://desenvolvedor.io/curso/dominando-o-asp-net-mvc-core)
+[Dominando o Asp.Net MVC Core](https://desenvolvedor.io/curso/dominando-o-asp-net-mvc-core)
 
 ## Instrutor
 
